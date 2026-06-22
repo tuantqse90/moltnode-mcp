@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * moltnode-mcp — a Model Context Protocol server that gives any MCP client
+ * moltnode-mcp: a Model Context Protocol server that gives any MCP client
  * (Claude Desktop, Cursor, Cline, Windsurf, …) zero-config, no-key access to
  * 31+ chains through the MoltNode RPC gateway (https://moltnode.ag).
  *
@@ -86,7 +86,7 @@ async function main() {
     {
       title: "Raw JSON-RPC call",
       description:
-        "Make any JSON-RPC 2.0 call against a chain through MoltNode. Works for EVM (eth_*), Solana (getSlot, getAccountInfo, …) and Sui. The general-purpose tool — prefer it whenever no convenience tool fits. `params` is the JSON-RPC params array.",
+        "Make any JSON-RPC 2.0 call against a chain through MoltNode. Works for EVM (eth_*), Solana (getSlot, getAccountInfo), and Sui. It is the general-purpose tool, so prefer it whenever no convenience tool fits. `params` is the JSON-RPC params array.",
       inputSchema: {
         chain: chainEnum.describe("Chain slug from list_chains, e.g. 'ethereum', 'base', 'monad', 'solana'."),
         method: z.string().describe("JSON-RPC method, e.g. 'eth_blockNumber', 'eth_getBalance', 'getSlot'."),
@@ -149,7 +149,7 @@ async function main() {
   );
 
   await server.connect(new StdioServerTransport());
-  console.error(`moltnode-mcp ready — ${chains.length} chains via ${GATEWAY}`);
+  console.error(`moltnode-mcp ready: ${chains.length} chains via ${GATEWAY}`);
 }
 
 main().catch((e) => {
