@@ -1,10 +1,14 @@
 {
   "name": "moltnode",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MoltNode by Chord: read 31 blockchains over JSON-RPC and swap via Chord (best route, unsigned transaction, simulation), plus Chord market data. Hosted MCP servers, no API key.",
   "mcpServers": {
-    "moltnode": { "httpUrl": "https://moltnode.ag/mcp" },
-    "chord": { "httpUrl": "https://api.getchord.xyz/v1/mcp" }
+    "moltnode": {
+      "httpUrl": "https://moltnode.ag/mcp"
+    },
+    "chord": {
+      "httpUrl": "https://api.getchord.xyz/v1/mcp"
+    }
   },
   "contextFileName": "GEMINI.md"
 }
