@@ -14,6 +14,6 @@ MoltNode is a hosted MCP server. Nothing to build and no API key.
    { "mcpServers": { "moltnode": { "command": "npx", "args": ["-y", "github:tuantqse90/moltnode-mcp"] } } }
    ```
 
-3. Check it: call `list_chains`. It returns 31 chains and the six Chord trades on.
+3. Check it: call `list_chains`. It returns 31 chains and the seven Chord trades on.
 
 To swap: `chord_find_token` → `chord_swap_quote` with `taker` = the user's wallet → sign `approval.tx` if present → sign `tx` → `send_raw_transaction`. The user's own wallet signs; the server never holds keys or funds.

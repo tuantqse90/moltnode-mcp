@@ -5,7 +5,7 @@
 Read 31 blockchains and swap tokens from any AI agent. One hosted MCP server, no API key, no signup.
 
 - **Read**: JSON-RPC on Ethereum, Base, Arbitrum, Solana, Monad, BNB Chain, Avalanche, Sui and 23 more, through [MoltNode](https://moltnode.ag) (automatic failover across providers).
-- **Trade**: best-route swap quotes from [Chord](https://getchord.xyz) on Base, Monad, BNB Chain, Avalanche, Robinhood Chain and Arc, with the unsigned transaction, the approval it needs and a simulation run from your wallet. Your agent signs with its own key; nothing is ever held for you.
+- **Trade**: best-route swap quotes from [Chord](https://getchord.xyz) on Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain and Arc, with the unsigned transaction, the approval it needs and a simulation run from your wallet. Your agent signs with its own key; nothing is ever held for you.
 
 ```
 https://moltnode.ag/mcp
@@ -76,7 +76,7 @@ The router enforces `minAmountOut` on-chain. Chord's own router answers first; a
 
 Read: Monad, Ethereum, Base, Arbitrum One, Optimism, Polygon, BNB Chain, Solana, Avalanche C-Chain, HyperEVM, Berachain, Abstract, Sei, Sonic, Mantle, Taiko, zkSync Era, ZetaChain, opBNB, BOB, Edge, Stable, Katana, Morph, Swellchain, 0G, TAC, X Layer, Gnosis, Fantom, Sui.
 
-Trade (Chord): Base, Monad, BNB Chain, Avalanche, Robinhood Chain, Arc.
+Trade (Chord): Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc.
 
 ## Limits
 
