@@ -33,7 +33,7 @@
 The MCP endpoint is this Actor's Standby URL plus `/mcp`:
 
 ```
-{{ACTOR_URL}}/mcp
+https://getchord--chord-mcp.apify.actor/mcp
 ```
 
 Authenticate with your Apify API token (Console > Settings > API & Integrations).
@@ -41,7 +41,7 @@ Authenticate with your Apify API token (Console > Settings > API & Integrations)
 **Claude Code**
 
 ```bash
-claude mcp add --transport http chord {{ACTOR_URL}}/mcp --header "Authorization: Bearer $APIFY_TOKEN"
+claude mcp add --transport http chord https://getchord--chord-mcp.apify.actor/mcp --header "Authorization: Bearer $APIFY_TOKEN"
 ```
 
 **Cursor / Windsurf / VS Code** (`mcp.json`)
@@ -50,7 +50,7 @@ claude mcp add --transport http chord {{ACTOR_URL}}/mcp --header "Authorization:
 {
   "mcpServers": {
     "chord": {
-      "url": "{{ACTOR_URL}}/mcp",
+      "url": "https://getchord--chord-mcp.apify.actor/mcp",
       "headers": { "Authorization": "Bearer <APIFY_TOKEN>" }
     }
   }
@@ -64,7 +64,7 @@ claude mcp add --transport http chord {{ACTOR_URL}}/mcp --header "Authorization:
   "mcpServers": {
     "chord": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "{{ACTOR_URL}}/mcp", "--header", "Authorization: Bearer <APIFY_TOKEN>"]
+      "args": ["-y", "mcp-remote", "https://getchord--chord-mcp.apify.actor/mcp", "--header", "Authorization: Bearer <APIFY_TOKEN>"]
     }
   }
 }

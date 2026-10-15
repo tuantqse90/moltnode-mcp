@@ -23,7 +23,7 @@ Give any AI agent read access to **31 blockchains** and **best-route token swaps
 The MCP endpoint is this Actor's Standby URL plus `/mcp`:
 
 ```
-{{ACTOR_URL}}/mcp
+https://getchord--moltnode-mcp.apify.actor/mcp
 ```
 
 Authenticate with your Apify API token (Console > Settings > API & Integrations).
@@ -31,7 +31,7 @@ Authenticate with your Apify API token (Console > Settings > API & Integrations)
 **Claude Code**
 
 ```bash
-claude mcp add --transport http moltnode {{ACTOR_URL}}/mcp --header "Authorization: Bearer $APIFY_TOKEN"
+claude mcp add --transport http moltnode https://getchord--moltnode-mcp.apify.actor/mcp --header "Authorization: Bearer $APIFY_TOKEN"
 ```
 
 **Cursor / Windsurf / VS Code** (`mcp.json`)
@@ -40,7 +40,7 @@ claude mcp add --transport http moltnode {{ACTOR_URL}}/mcp --header "Authorizati
 {
   "mcpServers": {
     "moltnode": {
-      "url": "{{ACTOR_URL}}/mcp",
+      "url": "https://getchord--moltnode-mcp.apify.actor/mcp",
       "headers": { "Authorization": "Bearer <APIFY_TOKEN>" }
     }
   }
@@ -54,7 +54,7 @@ claude mcp add --transport http moltnode {{ACTOR_URL}}/mcp --header "Authorizati
   "mcpServers": {
     "moltnode": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "{{ACTOR_URL}}/mcp", "--header", "Authorization: Bearer <APIFY_TOKEN>"]
+      "args": ["-y", "mcp-remote", "https://getchord--moltnode-mcp.apify.actor/mcp", "--header", "Authorization: Bearer <APIFY_TOKEN>"]
     }
   }
 }
