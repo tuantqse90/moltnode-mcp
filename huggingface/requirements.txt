@@ -1,0 +1,2 @@
+gradio[mcp]==6.30.0
+httpx
