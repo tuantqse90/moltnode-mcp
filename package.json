@@ -1,55 +1,48 @@
 {
   "name": "moltnode-mcp",
-  "version": "0.1.0",
-  "description": "Zero-config, no-key MCP server for 31+ chains via the MoltNode RPC gateway (moltnode.ag). For humans and agents.",
+  "version": "1.1.0",
+  "description": "MoltNode by Chord: MCP server to read 31 blockchains over JSON-RPC and swap through Chord. No API key. Stdio bridge to the hosted server at https://moltnode.ag/mcp.",
   "type": "module",
   "bin": {
-    "moltnode-mcp": "dist/index.js"
+    "moltnode-mcp": "index.mjs"
   },
+  "main": "index.mjs",
   "files": [
-    "dist"
+    "index.mjs",
+    "README.md",
+    "LICENSE"
   ],
-  "scripts": {
-    "build": "tsc && chmod +x dist/index.js",
-    "start": "node dist/index.js",
-    "dev": "tsc --watch",
-    "prepack": "npm run build",
-    "prepublishOnly": "npm run build"
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1"
   },
   "keywords": [
     "mcp",
     "model-context-protocol",
     "rpc",
     "json-rpc",
-    "ethereum",
-    "evm",
-    "solana",
-    "sui",
-    "web3",
     "blockchain",
-    "moltnode",
+    "ethereum",
+    "solana",
+    "base",
+    "monad",
+    "swap",
+    "dex",
+    "defi",
     "agents",
-    "claude"
+    "chord"
   ],
-  "license": "MIT",
-  "author": "nullshift labs (0xtunad)",
-  "homepage": "https://moltnode.ag",
+  "homepage": "https://moltnode.ag/agents",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tuantqse90/moltnode-mcp.git"
   },
+  "license": "MIT",
+  "mcpName": "io.github.tuantqse90/moltnode",
+  "author": "Chord (getchord.xyz) / NullShift Labs",
   "bugs": {
     "url": "https://github.com/tuantqse90/moltnode-mcp/issues"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.6.0"
   }
 }
