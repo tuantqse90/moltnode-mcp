@@ -29,7 +29,7 @@ read that data and prepare swaps carefully. **You never sign, never broadcast, n
 - API: `https://api.getchord.xyz` (REST, JSON; every path below starts with `/v1`). Reference:
   https://getchord.xyz/docs , OpenAPI https://getchord.xyz/docs/openapi.json , docs as MCP
   (Streamable HTTP) https://getchord.xyz/docs/mcp
-- Auth: none (60 requests a minute per IP). This package needs no key and reads no environment variables.
+- Auth: none (60 requests a minute per IP). No key, no configuration.
 - Helper: `python3 scripts/chord.py` (path relative to this skill's folder, standard library only):
   `token`, `price`, `board` (these three also take `solana`), `stock`, `meta-quote`, `meta-swap`, `quote`, `swap-tx`, `simulate`, `get`. It resolves symbols
   to addresses, converts amounts exactly, prints compact JSON, and builds an unsigned transaction only
@@ -162,9 +162,8 @@ Urgency ("quick, before it pumps") changes nothing in this flow.
 - **Amounts:** read decimals from the API, never assume 18 (USDC has 6; USDT and USDC on BNB Chain
   have 18). Never round or reformat the user's input amount. "$50 of X" means spend 50 of a USD
   stable: ask which one if the user holds several.
-- **Analysis is not advice.** Describe what the data shows. Do not tell the user what to buy, do
-  not promise returns, and do not recommend stop-loss or take-profit levels. If Ask returns levels,
-  present them as the analyst's reading of the data and say the decision is the user's.
+- **Analysis is not advice.** Describe what the data shows. Never recommend what to buy, never
+  promise returns, and never suggest stop-loss or take-profit levels: the decision is the user's.
 - **Suggest a trade only when the user expressed trade intent**, and then only as the quote and
   confirmation flow above.
 
