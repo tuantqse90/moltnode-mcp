@@ -2,15 +2,16 @@
 name: chord
 description: >-
   Chord (getchord.xyz) on-chain market data, best-route swap quotes and UNSIGNED swap
-  transactions on eight EVM chains: Monad (143), Robinhood Chain (4663, tokenized US stocks such
-  as NVDA, TSLA, SPY traded against USDG), Arc (5042, Circle's chain with USDC as gas),
-  Avalanche (43114), Base (8453), BNB Chain (56), Arbitrum One (42161) and Ethereum (1). Use when the user asks for a token price or
-  chart, the most traded or trending tokens, chain or DEX volume, a swap quote or route, an
-  unsigned swap for their own wallet to sign, a Robinhood Chain stock token and its gap to the
-  real share, holders, smart-money wallets, a wallet's PnL, or liquidity pools on these chains. Also Solana data: pump.fun / PumpSwap / Meteora / Raydium / Orca token
-  boards, prices, candles, traders and wallet PnL (Solana swaps exist in beta, not open to API keys
-  yet: check /v1/sol/trade/config). Do NOT use for other chains (Optimism, Polygon, TRON...), exchange accounts, perps or limit orders, transfers,
-  withdrawals or bridging, or general blockchain education. Chord never signs or moves funds.
+  transactions on eight EVM chains: Monad, Robinhood Chain (tokenized US stocks such as NVDA,
+  TSLA, SPY traded against USDG), Arc (Circle's chain, USDC as gas), Avalanche, Base, BNB Chain,
+  Arbitrum One and Ethereum. Use when the user asks for a token price or chart, the most traded or
+  trending tokens, chain or DEX volume, a swap quote or route, an unsigned swap for their own
+  wallet to sign, a Robinhood Chain stock token and its gap to the real share, holders,
+  smart-money wallets, a wallet's PnL, or liquidity pools on these chains. Also Solana data:
+  pump.fun / PumpSwap / Meteora / Raydium / Orca token boards, prices, candles, traders and wallet
+  PnL (Solana swaps are in beta, not open to API keys yet). Do NOT use for other chains (Optimism,
+  Polygon, TRON...), exchange accounts, perps or limit orders, transfers, withdrawals or bridging,
+  or general blockchain education. Chord never signs or moves funds.
 license: MIT
 compatibility: Needs HTTPS access to api.getchord.xyz with curl or python3. No key (60 requests a minute).
 metadata:
