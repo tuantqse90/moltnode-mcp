@@ -100,8 +100,8 @@ curl -s "https://api.getchord.xyz/v1/quote?chain=8453&inputMint=0x833589fcd6edb6
   (6 decimals) is `50000000`; 0.1 ETH (18) is `100000000000000000`. Use the token list's `decimals`.
   Do the arithmetic on strings or integers, never floats. If the user's amount has more decimal places
   than the token, ask; do not round.
-- `slippageBps` 1 to 5000, default 50 (0.5 %). Do not raise it above 300 (3 %) without telling the
-  user why; very high slippage invites sandwich losses.
+- `slippageBps` 1 to 5000, default 50 (0.5 %). Above 300 (3 %), explain why to the user first;
+  very high slippage invites sandwich losses.
 
 ### Reading the quote
 
