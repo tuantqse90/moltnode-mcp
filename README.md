@@ -65,7 +65,11 @@ The stdio bridge in this repo (`index.mjs`) forwards every call to the hosted se
 
 The router enforces `minAmountOut` on-chain. Chord's own router answers first; another aggregator is used only when Chord has no route, and the answer says which.
 
-## Agent skill
+## Agent skills
+
+- `skills/moltnode/`: read 31 chains and swap through Chord end to end, with the safety rules (never handle a private key, confirm the quote before signing).
+- `skills/chord-charts/`: candlestick chart (SVG) with volume for any token on Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc or Solana, from Chord's trade data (`python3 scripts/chart.py --chain base --token AERO --tf 1h`).
+- Chord's full skill (quotes, swaps, token boards, wallet PnL, smart money, holders, LP pools, Ask): https://getchord.xyz/docs/skills/chord/
 
 `skills/moltnode/SKILL.md` is a SKILL.md skill (Claude Code, Codex CLI, Cursor, Gemini CLI, OpenClaw and others): when to read a chain, how to run a swap end to end, and the safety rules (never handle a private key, confirm the quote before signing). Install it by copying the folder into your agent's skills directory, e.g. `~/.claude/skills/moltnode/`.
 
