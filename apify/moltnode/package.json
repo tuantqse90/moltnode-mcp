@@ -1,0 +1,7 @@
+{
+  "name": "moltnode-mcp-apify",
+  "private": true,
+  "type": "module",
+  "main": "main.mjs",
+  "license": "MIT"
+}

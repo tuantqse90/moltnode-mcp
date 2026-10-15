@@ -22,7 +22,7 @@ MoltNode is a free, keyless RPC gateway: one URL per chain. Chord (getchord.xyz)
 | Swap quote + unsigned tx (Chord) | `GET https://api.getchord.xyz/v1/meta/quote?chain=<key>&tokenIn=&tokenOut=&amount=&taker=` |
 | MCP server (optional, same tools) | `https://moltnode.ag/mcp` |
 
-Slugs and chain keys: [references/chains.md](references/chains.md). Chord trades on `base`, `monad`, `bnb`, `avalanche`, `arbitrum`, `robinhood` and `arc`.
+Slugs and chain keys: [references/chains.md](references/chains.md). Chord trades on `ethereum`, `base`, `monad`, `bnb`, `avalanche`, `arbitrum`, `robinhood` and `arc`.
 
 If the MoltNode MCP server is connected (tools `rpc_call`, `chord_find_token`, `chord_swap_quote`, `send_raw_transaction`), use those tools. Otherwise make the HTTP calls below.
 

@@ -8,7 +8,7 @@ milliseconds (`updatedAt`).
 All numbers come from Chord's own index of on-chain swaps ("the tape"), except `ref-price`, which is
 CoinGecko. Say which one you used.
 
-This page covers the six EVM chains. Solana has its own read-only family (`/v1/chains/solana/*`,
+This page covers the eight EVM chains. Solana has its own read-only family (`/v1/chains/solana/*`,
 base58 addresses, `updatedAt` in seconds, different coverage): see `solana.md`.
 
 ```bash
@@ -21,7 +21,7 @@ Never guess an address. Use the helper or the curated list of the chain:
 
 ```bash
 python3 scripts/chord.py token base AERO        # candidates with address, decimals, tags, flags
-curl -s "$BASE/tokens?chain=8453"               # curated list (any of 143, 4663, 5042, 43114, 8453, 56)
+curl -s "$BASE/tokens?chain=8453"               # curated list (any of 143, 4663, 5042, 43114, 8453, 56, 42161, 1)
 curl -s "$BASE/arc/tokens/search?q=argus&limit=5"   # Arc: every token traded in 24h, listed or not
 ```
 
@@ -44,10 +44,10 @@ token, and adds the CoinGecko cross-check where it exists. Raw calls:
 | Robinhood 4663 | `GET /tokens/market?chain=4663` | same shape, plus `txns24h`, `liquidityUsd`, `spark` (24 hourly closes) |
 | Robinhood 4663, one token | `GET /rh/token/{addr}?hours=24` | `token.priceUsd`, `token.change24hPct`, `token.volume24h` |
 | Arc 5042 | `GET /arc/token/{addr}?hours=24` | `token.priceUsd`, `token.change24hPct`, `token.marketCapUsd` |
-| Avalanche, Base, BNB, Arbitrum | `GET /chains/{key}/token/{addr}?hours=24` | `stats24h.priceUsd`, `stats24h.change24hPct`, `stats24h.volUsd`, `byDex` |
-| Avalanche, Base, BNB, Arbitrum | `GET /chains/{key}/token/{addr}/ref-price` | CoinGecko `priceUsd`; `404 NOT_LISTED` = CoinGecko does not know this contract |
+| Avalanche, Base, BNB, Arbitrum, Ethereum | `GET /chains/{key}/token/{addr}?hours=24` | `stats24h.priceUsd`, `stats24h.change24hPct`, `stats24h.volUsd`, `byDex` |
+| Avalanche, Base, BNB, Arbitrum, Ethereum | `GET /chains/{key}/token/{addr}/ref-price` | CoinGecko `priceUsd`; `404 NOT_LISTED` = CoinGecko does not know this contract |
 
-`{key}` is `avalanche`, `base`, `bnb` or `arbitrum` (the numeric id also works). The zero address in a
+`{key}` is `avalanche`, `base`, `bnb`, `arbitrum` or `ethereum` (the numeric id also works). The zero address in a
 `/chains/...` path means the chain's wrapped native token.
 
 ```bash
@@ -68,7 +68,7 @@ say so: cbBTC on Base, BTC.b on Avalanche, BTCB on BNB Chain, cirBTC on Arc, WET
 curl -s "$BASE/candles?chain=8453&token=0x940181a94a35a4569e4529a3cdfb74e38fd98631&tf=1h&limit=24"
 ```
 
-- Works on all six chains. `tf`: `1m 5m 15m 1h 4h 1d 1w`. `limit` up to 1000; page with `from` / `to`
+- Works on all eight EVM chains. `tf`: `1m 5m 15m 1h 4h 1d 1w`. `limit` up to 1000; page with `from` / `to`
   (Unix seconds). `fill=1` carries the close through empty buckets.
 - Each candle: `t` (bucket start), `o h l c` (USD), `v` (USD volume), `n` (trades). `forming: true`
   means the last candle is still open.
@@ -78,13 +78,13 @@ curl -s "$BASE/candles?chain=8453&token=0x940181a94a35a4569e4529a3cdfb74e38fd986
 ## 4. Boards: what traded most, what is moving
 
 `python3 scripts/chord.py board CHAIN --limit 10 [--sort volume|trades|change]` returns compact rows for
-any of the six chains. Raw calls (always pass `limit`):
+any of the eight EVM chains. Raw calls (always pass `limit`):
 
 | Chain | Most traded 24h | Movers |
 |---|---|---|
 | Arc 5042 | `GET /arc/tokens?sort=volume&limit=10` (sorts: `volume trades traders change mcap`; default limit 100; `includeUnlisted=1` adds tokens without curated metadata) | `GET /arc/trending?limit=10` (2-hour acceleration score) |
 | Robinhood 4663 | `GET /rh/tokens?sort=volume&limit=10` (`volume trades traders change`) | `sort=change` |
-| Avalanche, Base, BNB, Arbitrum | `GET /chains/{key}/tokens?sort=volume&limit=10` (`volume trades change`) | `sort=change` |
+| Avalanche, Base, BNB, Arbitrum, Ethereum | `GET /chains/{key}/tokens?sort=volume&limit=10` (`volume trades change`) | `sort=change` |
 | Monad 143 | `GET /tokens/market?chain=143`, sort rows by `volume24h` yourself | sort by `change24h` |
 
 Arc rows carry `flags`: `wash` (a day's volume carried by one or two wallets) and `impostor` (an
@@ -123,14 +123,14 @@ burned supply, not holders.
 curl -s "$BASE/smart-money/top?chain=4663&source=onchain&window=7d&limit=10"   # 5042, 4663, 143; window 24h 7d 30d all
 curl -s "$BASE/portfolio/{wallet}/pnl?chain=4663"     # 5042, 4663, 143 or all
 curl -s "$BASE/portfolio/{wallet}/trades?chain=4663"
-curl -s "$BASE/chains/base/wallet/{wallet}"           # Avalanche, Base, BNB, Arbitrum: swaps + average-cost PnL
+curl -s "$BASE/chains/base/wallet/{wallet}"           # Avalanche, Base, BNB, Arbitrum, Ethereum: swaps + average-cost PnL
 ```
 
 - PnL is average-cost from the wallet's swaps. Tokens that arrived by transfer have no cost basis and
   are excluded (`untrackedAmount`). It is not a balance sheet.
 - The smart-money board ranks by a skill-adjusted score with routers and bots removed; `pnlUsd` can
   be mostly unrealized (`unrealizedUsd`). Say that when you quote it.
-- On Avalanche, Base, BNB and Arbitrum the raw tape is short (days, see the `window` field): say how far back
+- On Avalanche, Base, BNB, Arbitrum and Ethereum the raw tape is short (days, see the `window` field): say how far back
   the numbers go.
 - Chord has no balance endpoint in the public REST API. For "what is in my wallet" use Ask with the
   wallet (Chord Ask at https://getchord.xyz/ask) or the user's wallet / block explorer.
@@ -157,7 +157,7 @@ APR figures annualise one window of fees: say which window (`interval`) and that
 ## 10. Backtests (Hyperliquid perps, FX, gold)
 
 `GET /v1/backtest` replays one bar-close strategy over stored candles. It is a simulation: nothing
-is traded, and it is not about the six chains above (the candles are Hyperliquid perps and
+is traded, and it is not about the eight EVM chains above (the candles are Hyperliquid perps and
 Dukascopy FX / metals).
 
 ```

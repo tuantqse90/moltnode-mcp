@@ -1,0 +1,1 @@
+{ "title": "Chord", "url": "https://api.getchord.xyz/v1/mcp", "keyHeader": "x-api-key", "keyEnv": "CHORD_API_KEY", "ua": "chord-apify/1.0", "docs": "https://getchord.xyz/docs/agents/mcp" }

@@ -1,9 +1,14 @@
-# Solana data on Chord (read-only)
+# Solana on Chord
 
 Chord reads Solana from its own tape and serves it under `https://api.getchord.xyz/v1/chains/solana/*`.
 Every call is a plain GET, no key needed (60 requests a minute per IP).
-**Chord does not quote, route or build Solana swaps**: for "buy X on Solana", give the data and say
-Chord cannot trade it.
+
+**Swaps are in beta and not open to API keys yet.** `/v1/sol/trade/*` quotes SOL ↔ one token by
+building Chord's own route (Raydium, Orca, Meteora, pump.fun, PumpSwap) and Jupiter's for the
+wallet, simulating each, and keeping the one that leaves the wallet with more. Ask
+`GET https://api.getchord.xyz/v1/sol/trade/config` first: unless it says `"allowed": true`, every other
+route there answers `503 TRADE_NOT_ENABLED`. Then, for "buy X on Solana", give the data and say the
+trade happens in the user's own wallet for now.
 
 ```bash
 BASE=https://api.getchord.xyz/v1/chains/solana

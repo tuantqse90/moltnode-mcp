@@ -1,0 +1,7 @@
+{
+  "title": "MCP server",
+  "description": "No input needed. This Actor runs in Standby mode as an MCP server: connect your MCP client to the Standby URL + /mcp. A normal run only checks the upstream server and prints its tools.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {}
+}

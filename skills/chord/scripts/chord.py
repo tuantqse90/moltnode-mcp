@@ -6,10 +6,10 @@ to a wallet, and never broadcasts: the most it does is ask the API for an UNSIGN
 only when the caller passes --user-confirmed.
 
 Commands
-  chains                                   the six chains (+ Solana, data only), their ids, gas tokens and data families
+  chains                                   the eight chains (+ Solana, data only), their ids, gas tokens and data families
   get PATH                                 GET any public /v1 path, print the JSON
   token CHAIN QUERY                        resolve a symbol, name or 0x address to token candidates
-  price CHAIN TOKEN                        price and 24h stats from Chord's index (+ CoinGecko on 43114/8453/56/42161)
+  price CHAIN TOKEN                        price and 24h stats from Chord's index (+ CoinGecko on 43114/8453/56/42161/1)
   board CHAIN [--sort volume] [--limit 10] most traded / moving tokens in the last 24h, compact rows
                                            token / price / board also take CHAIN = solana (read-only: base58 mints,
                                            case-sensitive; Chord does not quote or build Solana swaps)
@@ -63,6 +63,7 @@ CHAINS = {
     8453: {"key": "base", "name": "Base", "gas": "ETH", "native": "ETH", "family": "/v1/chains/base/*"},
     56: {"key": "bnb", "name": "BNB Chain", "gas": "BNB", "native": "BNB", "family": "/v1/chains/bnb/*"},
     42161: {"key": "arbitrum", "name": "Arbitrum One", "gas": "ETH", "native": "ETH", "family": "/v1/chains/arbitrum/*"},
+    1: {"key": "ethereum", "name": "Ethereum", "gas": "ETH", "native": "ETH", "family": "/v1/chains/ethereum/*"},
 }
 ALIASES = {
     "monad": 143, "mon": 143, "143": 143,
@@ -72,6 +73,8 @@ ALIASES = {
     "base": 8453, "8453": 8453,
     "bnb": 56, "bsc": 56, "bnb-chain": 56, "bnbchain": 56, "56": 56,
     "arbitrum": 42161, "arbitrum-one": 42161, "arb": 42161, "arb1": 42161, "42161": 42161,
+    # "eth" alone is the coin (on Base, Arbitrum, Robinhood Chain too), never the chain.
+    "ethereum": 1, "ethereum-mainnet": 1, "eth-mainnet": 1, "mainnet": 1, "1": 1,
 }
 
 
@@ -89,7 +92,7 @@ def chain_id(raw):
         die("Solana is read-only in Chord: use 'token solana QUERY', 'price solana MINT', 'board solana' or 'get /v1/chains/solana/...'. Chord does not quote, route or build Solana swaps.")
     cid = ALIASES.get(str(raw).strip().lower().replace(" ", "-"))
     if cid is None:
-        die(f"unsupported chain '{raw}'. Chord covers: " + ", ".join(f"{v['name']} ({k})" for k, v in CHAINS.items()) + ", plus Solana data (read-only). It does not cover Ethereum mainnet or other chains.")
+        die(f"unsupported chain '{raw}'. Chord covers: " + ", ".join(f"{v['name']} ({k})" for k, v in CHAINS.items()) + ", plus Solana data (read-only). It does not cover Optimism, Polygon or other chains.")
     return cid
 
 
@@ -151,7 +154,7 @@ def detail_decimals(cid, addr):
         d = api(f"/v1/arc/token/{a}?hours=1")
     elif cid == 4663:
         d = api(f"/v1/rh/token/{a}?hours=1")
-    elif cid in (43114, 8453, 56, 42161):
+    elif cid in (43114, 8453, 56, 42161, 1):
         d = api(f"/v1/chains/{cid}/token/{a}?hours=1")
     else:
         return None
@@ -427,7 +430,7 @@ def cmd_stock(args):
 def cmd_chains(_args):
     rows = [{"chainId": k, "key": v["key"], "name": v["name"], "gasToken": v["gas"], "dataEndpoints": v["family"], "quoteAndSwap": True} for k, v in CHAINS.items()]
     rows.append({"chainId": None, "key": "solana", "name": "Solana", "gasToken": "SOL", "dataEndpoints": "/v1/chains/solana/*", "quoteAndSwap": False})
-    print(json.dumps({"chains": rows, "router": ROUTER, "note": "The seven EVM chains answer /v1/quote, POST /v1/swap and /v1/candles with ?chain=<id>. Solana is data only, under /v1/chains/solana/* (no chain id; base58 addresses, case-sensitive)."}, indent=1))
+    print(json.dumps({"chains": rows, "router": ROUTER, "note": "The eight EVM chains answer /v1/quote, POST /v1/swap and /v1/candles with ?chain=<id>. Solana is data only, under /v1/chains/solana/* (no chain id; base58 addresses, case-sensitive)."}, indent=1))
 
 
 def cmd_get(args):
@@ -805,7 +808,7 @@ def cmd_meta_swap(args):
         "providerName": s["providerName"],
         "fallbackReason": s["fallbackReason"],
         "transaction": m.get("tx"),
-        "approval": None if not m.get("approval") else dict(m["approval"], note="Approve exactly this amount (not unlimited) to this spender before the swap."),
+        "approval": None if not m.get("approval") else dict(m["approval"], note=("This token (USDT on Ethereum) reverts a new approval while an old one is left: approve 0 to this spender first, then exactly this amount, then swap." if m["approval"].get("resetFirst") else "Approve exactly this amount (not unlimited) to this spender before the swap.")),
         "simulation": m.get("simulation"),
         "summary": {k: s.get(k) for k in ("sell", "buy", "expectedOutAfterFee", "minimumReceived", "priceImpactPct", "valueLossPct", "route")},
         "warnings": m.get("warnings") or [],
@@ -822,8 +825,7 @@ def main():
         print(__doc__)
         return
     cmd, args = sys.argv[1], sys.argv[2:]
-    handlers = {"chains": cmd_chains, "get": cmd_get, "token": cmd_token, "price": cmd_price, "board": cmd_board, "stock": cmd_stock, 
-                "quote": cmd_quote, "swap-tx": cmd_swap_tx, "simulate": cmd_simulate, "meta-quote": cmd_meta_quote, "meta-swap": cmd_meta_swap}
+    handlers = {"chains": cmd_chains, "get": cmd_get, "token": cmd_token, "price": cmd_price, "board": cmd_board, "stock": cmd_stock, "quote": cmd_quote, "swap-tx": cmd_swap_tx, "simulate": cmd_simulate, "meta-quote": cmd_meta_quote, "meta-swap": cmd_meta_swap}
     if cmd not in handlers:
         die(f"unknown command '{cmd}'. Run chord.py --help.")
     handlers[cmd](args)

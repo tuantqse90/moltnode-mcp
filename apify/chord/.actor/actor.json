@@ -1,0 +1,17 @@
+{
+  "actorSpecification": 1,
+  "name": "chord-mcp",
+  "title": "Chord: DEX Aggregator and On-Chain Market Data MCP Server",
+  "description": "MCP server for AI agents: best-route swap quotes and unsigned transactions on 8 EVM chains, plus token boards, candles, trades, wallet PnL, smart money, holders and LP pools on 9 chains including Solana. Non-custodial, no key needed.",
+  "version": "1.2",
+  "buildTag": "latest",
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "dockerfile": "../Dockerfile",
+  "dockerContextDir": "..",
+  "readme": "../README.md",
+  "input": "./input_schema.json",
+  "minMemoryMbytes": 128,
+  "defaultMemoryMbytes": 256,
+  "maxMemoryMbytes": 512
+}

@@ -1,0 +1,17 @@
+{
+  "actorSpecification": 1,
+  "name": "moltnode-mcp",
+  "title": "MoltNode by Chord: Blockchain RPC and Swap MCP Server",
+  "description": "MCP server for AI agents: read 31 blockchains over JSON-RPC (Ethereum, Base, Solana, Arbitrum, Monad, BNB Chain, Sui and more) and get best-route swap quotes with unsigned transactions from Chord. Non-custodial.",
+  "version": "1.1",
+  "buildTag": "latest",
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "dockerfile": "../Dockerfile",
+  "dockerContextDir": "..",
+  "readme": "../README.md",
+  "input": "./input_schema.json",
+  "minMemoryMbytes": 128,
+  "defaultMemoryMbytes": 256,
+  "maxMemoryMbytes": 512
+}

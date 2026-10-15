@@ -2,10 +2,12 @@
 
 # MoltNode by Chord: MCP server
 
+<!-- mcp-name: io.github.tuantqse90/moltnode -->
+
 Read 31 blockchains and swap tokens from any AI agent. One hosted MCP server, no API key, no signup.
 
 - **Read**: JSON-RPC on Ethereum, Base, Arbitrum, Solana, Monad, BNB Chain, Avalanche, Sui and 23 more, through [MoltNode](https://moltnode.ag) (automatic failover across providers).
-- **Trade**: best-route swap quotes from [Chord](https://getchord.xyz) on Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain and Arc, with the unsigned transaction, the approval it needs and a simulation run from your wallet. Your agent signs with its own key; nothing is ever held for you.
+- **Trade**: best-route swap quotes from [Chord](https://getchord.xyz) on Ethereum, Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain and Arc, with the unsigned transaction, the approval it needs and a simulation run from your wallet. Your agent signs with its own key; nothing is ever held for you.
 
 ```
 https://moltnode.ag/mcp
@@ -76,8 +78,8 @@ The router enforces `minAmountOut` on-chain. Chord's own router answers first; a
 Install with the skills CLI (Claude Code, Codex, Cursor, Gemini CLI and more): `npx skills add tuantqse90/moltnode-mcp`, or in Hermes: `hermes skills tap add tuantqse90/moltnode-mcp`. Gemini CLI extension: `gemini extensions install https://github.com/tuantqse90/moltnode-mcp`.
 
 - `skills/moltnode/`: read 31 chains and swap through Chord end to end, with the safety rules (never handle a private key, confirm the quote before signing).
-- `skills/chord-charts/`: candlestick chart (SVG) with volume for any token on Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc or Solana, from Chord's trade data (`python3 scripts/chart.py --chain base --token AERO --tf 1h`).
-- `skills/chord/`: Chord's trading and market-data skill (quotes, unsigned swaps, token boards, candles, wallet PnL, smart money, holders, LP pools), marketplace edition: no key handling, no environment variables, no installer (generated from Chord's skill at nullterminal `503ebfb8`; the Ask command, which needs a key, is left out). The original with Ask: https://getchord.xyz/docs/skills/chord/
+- `skills/chord-charts/`: candlestick chart (SVG) with volume for any token on Ethereum, Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc or Solana, from Chord's trade data (`python3 scripts/chart.py --chain base --token AERO --tf 1h`).
+- `skills/chord/`: Chord's trading and market-data skill (quotes, unsigned swaps, token boards, candles, wallet PnL, smart money, holders, LP pools), marketplace edition: no key handling, no environment variables, no installer (generated from Chord's skill at nullterminal `5f07c02e`; the Ask command, which needs a key, is left out). The original with Ask: https://getchord.xyz/docs/skills/chord/
 
 `skills/moltnode/SKILL.md` is a SKILL.md skill (Claude Code, Codex CLI, Cursor, Gemini CLI, OpenClaw and others): when to read a chain, how to run a swap end to end, and the safety rules (never handle a private key, confirm the quote before signing). Install it by copying the folder into your agent's skills directory, e.g. `~/.claude/skills/moltnode/`.
 
@@ -92,7 +94,7 @@ Install with the skills CLI (Claude Code, Codex, Cursor, Gemini CLI and more): `
 
 Read: Monad, Ethereum, Base, Arbitrum One, Optimism, Polygon, BNB Chain, Solana, Avalanche C-Chain, HyperEVM, Berachain, Abstract, Sei, Sonic, Mantle, Taiko, zkSync Era, ZetaChain, opBNB, BOB, Edge, Stable, Katana, Morph, Swellchain, 0G, TAC, X Layer, Gnosis, Fantom, Sui.
 
-Trade (Chord): Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc.
+Trade (Chord): Ethereum, Base, Monad, BNB Chain, Avalanche, Arbitrum, Robinhood Chain, Arc.
 
 ## Limits
 
