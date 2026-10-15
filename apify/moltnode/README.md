@@ -64,7 +64,7 @@ Apify's own MCP server (`mcp.apify.com`) can also call this Actor as a tool.
 
 ## Example prompts
 
-- "What is the latest block on Base, and how much ETH does vitalik.eth hold on Ethereum?"
+- "What is the latest block on Base, and how much ETH does 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 hold on Ethereum?"
 - "Read the `totalSupply()` of 0xA0b8...eB48 on Ethereum."
 - "Quote 100 USDC to ETH on Arbitrum for my wallet 0x... and show me the transaction to sign."
 - "List the chains you can trade on."
