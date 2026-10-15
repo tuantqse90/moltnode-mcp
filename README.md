@@ -44,10 +44,12 @@ In Claude Desktop or claude.ai you can also add it under Settings → Connectors
 ```json
 {
   "mcpServers": {
-    "moltnode": { "command": "npx", "args": ["-y", "github:tuantqse90/moltnode-mcp"] }
+    "moltnode": { "command": "npx", "args": ["-y", "moltnode-mcp"] }
   }
 }
 ```
+
+(`npx -y github:tuantqse90/moltnode-mcp` works too.)
 
 The stdio bridge in this repo (`index.mjs`) forwards every call to the hosted server, so both give the same tools.
 

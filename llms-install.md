@@ -11,7 +11,7 @@ MoltNode is a hosted MCP server. Nothing to build and no API key.
 2. If the client only starts local commands, use the stdio bridge (Node 18+):
 
    ```json
-   { "mcpServers": { "moltnode": { "command": "npx", "args": ["-y", "github:tuantqse90/moltnode-mcp"] } } }
+   { "mcpServers": { "moltnode": { "command": "npx", "args": ["-y", "moltnode-mcp"] } } }
    ```
 
 3. Check it: call `list_chains`. It returns 31 chains and the eight Chord trades on.
