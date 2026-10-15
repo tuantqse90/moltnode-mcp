@@ -65,6 +65,10 @@ The stdio bridge in this repo (`index.mjs`) forwards every call to the hosted se
 
 The router enforces `minAmountOut` on-chain. Chord's own router answers first; another aggregator is used only when Chord has no route, and the answer says which.
 
+## Agent skill
+
+`skills/moltnode/SKILL.md` is a SKILL.md skill (Claude Code, Codex CLI, Cursor, Gemini CLI, OpenClaw and others): when to read a chain, how to run a swap end to end, and the safety rules (never handle a private key, confirm the quote before signing). Install it by copying the folder into your agent's skills directory, e.g. `~/.claude/skills/moltnode/`.
+
 ## Without MCP
 
 - Function-calling definitions (Anthropic and OpenAI shapes), with the HTTP call behind each tool: https://moltnode.ag/tool-schema.json
