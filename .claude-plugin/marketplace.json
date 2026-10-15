@@ -1,0 +1,22 @@
+{
+  "name": "moltnode",
+  "owner": { "name": "Chord", "url": "https://getchord.xyz" },
+  "metadata": {
+    "description": "MoltNode by Chord: on-chain reads on 31 chains, swaps and market data from Chord, for Claude Code.",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "moltnode",
+      "source": "./",
+      "description": "Read 31 blockchains and swap via Chord: two hosted MCP servers (MoltNode, Chord) and three skills (moltnode, chord, chord-charts). No API key.",
+      "version": "1.1.0",
+      "author": { "name": "Chord", "url": "https://getchord.xyz" },
+      "homepage": "https://moltnode.ag/agents",
+      "repository": "https://github.com/tuantqse90/moltnode-mcp",
+      "license": "MIT",
+      "keywords": ["mcp", "blockchain", "swap", "dex", "crypto", "web3", "chart"],
+      "category": "finance"
+    }
+  ]
+}

@@ -19,6 +19,12 @@ https://moltnode.ag/mcp
 claude mcp add --transport http moltnode https://moltnode.ag/mcp
 ```
 
+Or install everything as a plugin (MoltNode + Chord MCP servers and the three skills):
+
+```
+/plugin install moltnode --marketplace tuantqse90/moltnode-mcp
+```
+
 **Cursor, Windsurf, VS Code, Claude Desktop and any client that takes a URL**
 
 ```json
