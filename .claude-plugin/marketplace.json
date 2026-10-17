@@ -12,7 +12,7 @@
     {
       "name": "moltnode",
       "source": "./",
-      "description": "Read 31 blockchains and swap via Chord: two hosted MCP servers (MoltNode, Chord) and three skills (moltnode, chord, chord-charts). No API key.",
+      "description": "Read 31 blockchains and swap via Chord: two hosted MCP servers (MoltNode, Chord) and four skills (moltnode, chord-swap, chord, chord-charts). No API key.",
       "version": "1.1.4",
       "author": {
         "name": "Chord",
