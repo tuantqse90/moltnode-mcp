@@ -3,5 +3,5 @@ FROM node:22-alpine
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --no-audit --no-fund
-COPY index.mjs ./
+COPY index.mjs tools.json ./
 ENTRYPOINT ["node", "index.mjs"]
